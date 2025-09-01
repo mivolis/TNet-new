@@ -700,7 +700,7 @@ class Experiment():
                     self.args.gamma) + "_flipRate_" + str(self.args.flipRate) + ".pkl"
 
         elif self.args.model == 'TargetedModel_DoubleBSpline':
-            file = "./results/baselines/" + self.args.model + "/" + self.args.dataset + "/perf/prediction_expID_" + \
+            file = "/kaggle/working/TNet-new/results/baselines/" + self.args.model + "/" + self.args.dataset + "/perf/prediction_expID_" + \
                        str(self.args.expID) + \
                        "_alpha_" + str(self.args.alpha) + "_gamma_" + str(self.args.gamma) + "_beta_" + '{:.4f}'.format(self.args.beta)  + \
                        "_flipRate_" + str(self.args.flipRate) + "_numGrid_" + str(self.args.num_grid) + \
