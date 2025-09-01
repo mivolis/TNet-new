@@ -47,11 +47,13 @@ def load_data(args):
     dataset,expID,flipRate,cuda = args.dataset,args.expID,args.flipRate,args.cuda
     if flipRate == 1:
         flipRate = 1
+    if flipRate == 0:
+        flipRate = 0
     
-    if dataset == "BC":
-        file = "../data/BC/simulation/"+str(dataset)+"_fliprate_"+str(flipRate)+"_expID_"+str(expID)+".pkl"
-    if dataset == "Flickr":
-        file = "../data/Flickr/simulation/"+str(dataset)+"_fliprate_"+str(flipRate)+"_expID_"+str(expID)+".pkl"
+    if dataset == "BC" or dataset == "BC_hete" or dataset == "BC_hete2":
+        file = "./data/BC/simulation/"+str(dataset)+"_fliprate_"+str(flipRate)+"_expID_"+str(expID)+".pkl"
+    if dataset == "Flickr" or dataset == "Flickr_hete" or dataset == "Flickr_hete2":
+        file = "./data/Flickr/simulation/"+str(dataset)+"_fliprate_"+str(flipRate)+"_expID_"+str(expID)+".pkl"
 
     with open(file,"rb") as f:
         data = pkl.load(f)
@@ -84,6 +86,48 @@ def load_data(args):
     return trainA, trainX, trainT,cfTrainT,POTrain,cfPOTrain,valA, valX, valT,cfValT, POVal,cfPOVal,testA, testX, testT,cfTestT,POTest,cfPOTest,train_t1z1,train_t1z0,train_t0z0,train_t0z7,train_t0z2,val_t1z1,val_t1z0,val_t0z0,val_t0z7,val_t0z2,test_t1z1,test_t1z0,test_t0z0,test_t0z7,test_t0z2
 
 
+def load_data_no_flip(args):
+    print("================================Dataset================================")
+    print("Model:{}, Dataset:{}, expID:{}, alpha:{}, gamma:{}".format(args.model, args.dataset, args.expID,
+                                                                                 args.alpha,
+                                                                                   args.gamma))
+    dataset, expID, flipRate, cuda = args.dataset, args.expID, 0, args.cuda
+
+    if dataset == "BC":
+        file = "./data/BC/simulation/" + str(dataset) + "_fliprate_" + str(flipRate) + "_expID_" + str(expID) + ".pkl"
+    if dataset == "Flickr":
+        file = "./data/Flickr/simulation/" + str(dataset) + "_fliprate_" + str(flipRate) + "_expID_" + str(
+            expID) + ".pkl"
+
+    with open(file, "rb") as f:
+        data = pkl.load(f)
+    dataTrain, dataVal, dataTest = data["train"], data["val"], data["test"]
+
+    Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
+
+    trainA, trainX, trainT, cfTrainT, POTrain, cfPOTrain = dataTransform(dataTrain, cuda)
+    valA, valX, valT, cfValT, POVal, cfPOVal = dataTransform(dataVal, cuda)
+    testA, testX, testT, cfTestT, POTest, cfPOTest = dataTransform(dataTest, cuda)
+
+    train_t1z1 = dataTrain["train_t1z1"]
+    train_t1z0 = dataTrain["train_t1z0"]
+    train_t0z0 = dataTrain["train_t0z0"]
+    train_t0z7 = dataTrain["train_t0z7"]
+    train_t0z2 = dataTrain["train_t0z2"]
+    val_t1z1 = dataVal["val_t1z1"]
+    val_t1z0 = dataVal["val_t1z0"]
+    val_t0z0 = dataVal["val_t0z0"]
+    val_t0z7 = dataVal["val_t0z7"]
+    val_t0z2 = dataVal["val_t0z2"]
+    test_t1z1 = dataTest["test_t1z1"]
+    test_t1z0 = dataTest["test_t1z0"]
+    test_t0z0 = dataTest["test_t0z0"]
+    test_t0z7 = dataTest["test_t0z7"]
+    test_t0z2 = dataTest["test_t0z2"]
+
+    return trainA, trainX, trainT, cfTrainT, POTrain, cfPOTrain, valA, valX, valT, cfValT, POVal, cfPOVal, testA, testX, testT, cfTestT, POTest, cfPOTest, train_t1z1, train_t1z0, train_t0z0, train_t0z7, train_t0z2, val_t1z1, val_t1z0, val_t0z0, val_t0z7, val_t0z2, test_t1z1, test_t1z0, test_t0z0, test_t0z7, test_t0z2
+
+
 def PO_normalize(normy,base,PO,cfPO):
     """Normalize PO"""
     if  normy:
@@ -96,7 +140,7 @@ def PO_normalize(normy,base,PO,cfPO):
 
 
 def PO_normalize_recover(normy,base,nPO):
-    
+
     if normy:
         ym, ys = torch.mean(base), torch.std(base)
         pred_PO = (nPO * ys + ym)
