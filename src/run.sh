@@ -37,6 +37,6 @@ if [ $1 -eq 6 ]; then
 fi
 if [ $1 -eq 7 ]; then
     for id in {0,1,2,3,4} ; do
-        CUDA_VISIBLE_DEVICES=1 python main.py --model=NetEsimator --dataset=BC
+        CUDA_VISIBLE_DEVICES=1 python main.py --model=NetEsimator --dataset=BC --expID=$id
     done
 fi
