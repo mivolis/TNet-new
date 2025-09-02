@@ -69,6 +69,35 @@ parser.add_argument('--printDisc_z', type=int, default=0, help='Print discrimina
 parser.add_argument('--printPred', type=int, default=1, help='Print encoder-predictor result for debug usage')
 parser.add_argument('--search', type=int, default=0, help='parameter searching')
 
+parser.add_argument('--cuda', type=int, default=7,help='Use CUDA training.')
+parser.add_argument('--seed', type=int, default=24, help='Random seed. RIP KOBE')
+parser.add_argument('--dataset', type=str, default='BC')#["BC","Flickr"]
+parser.add_argument('--expID', type=int, default=4)
+parser.add_argument('--flipRate', type=float, default=1)
+parser.add_argument('--alpha', type=float, default=0.5,help='trade-off of p(t|x).')
+parser.add_argument('--gamma', type=float, default=0.5,help='trade-off of p(z|x,t).')
+parser.add_argument('--epochs', type=int, default=300,help='Number of epochs to train.')
+parser.add_argument('--lr', type=float, default=1e-3,help='Initial learning rate.')
+parser.add_argument('--lrD', type=float, default=1e-3,help='Initial learning rate of Discriminator.')
+parser.add_argument('--lrD_z', type=float, default=1e-3,help='Initial learning rate of Discriminator_z.')
+parser.add_argument('--weight_decay', type=float, default=1e-5,help='Weight decay (L2 loss on parameters).')
+parser.add_argument('--dstep', type=int, default=50,help='epoch of training discriminator')
+parser.add_argument('--d_zstep', type=int, default=50,help='epoch of training discriminator_z')
+parser.add_argument('--pstep', type=int, default=1,help='epoch of training')
+parser.add_argument('--normy', type=int, default=1)
+parser.add_argument('--hidden', type=int, default=32,help='Number of hidden units.')
+parser.add_argument('--dropout', type=float, default=0.1,help='Dropout rate (1 - keep probability).')
+parser.add_argument('--save_intermediate', type=int, default=1,help='Save training curve and imtermediate embeddings')
+
+
+parser.add_argument('--model', type=str, default='NetEsimator',help='Models or baselines')
+#["NetEsimator","ND","TARNet","TARNet_INTERFERENCE","CFR","ND_INTERFERENCE","CFR_INTERFERENCE"]
+parser.add_argument('--alpha_base', type=float, default=0.5,help='trade-off of balance for baselines.')
+parser.add_argument('--printDisc', type=int, default=0,help='Print discriminator result for debug usage')
+parser.add_argument('--printDisc_z', type=int, default=0,help='Print discriminator_z result for debug usage')
+parser.add_argument('--printPred', type=int, default=1,help='Print encoder-predictor result for debug usage')
+
+
 startTime = time.time()
 
 args = parser.parse_args()
