@@ -100,6 +100,9 @@ if args.model == "TargetedModel_DoubleBSpline":
     print(args.num_grid)
     model = TargetedModel_DoubleBSpline(Xshape=trainX.shape[1], hidden=args.hidden, dropout=args.dropout,
                                         num_grid=args.num_grid, tr_knots=args.tr_knots)
+if args.model == "NetEsimator":
+    print(args.num_grid)
+    model = NetEsimator(Xshape=trainX.shape[1],hidden=args.hidden,dropout=args.dropout)
 
 exp = Experiment(args, model, trainA, trainX, trainT, cfTrainT, POTrain, cfPOTrain, valA, valX, valT, cfValT, POVal,
                  cfPOVal, testA, testX, testT, cfTestT, POTest, cfPOTest, \
