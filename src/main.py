@@ -1,4 +1,4 @@
-from ./model import NetEsimator
+from model import NetEsimator
 import argparse
 import torch
 import time
