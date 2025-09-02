@@ -697,7 +697,7 @@ class Experiment():
             print("================================Save prediction...================================")
             file = "./results/" + self.args.dataset + "/perf/" + self.args.dataset + "_prediction_expID_" + str(
                     self.args.expID) + "_alpha_" + str(self.args.alpha) + "_gamma_" + str(
-                    self.args.gamma) + "_flipRate_" + str(self.args.flipRate) + ".pkl"
+                    self.args.gamma) + "_flipRate_" + str("{:.1f}".format(self.args.flipRate)) + ".pkl"
 
         elif self.args.model == 'TargetedModel_DoubleBSpline':
             file = "/kaggle/working/TNet-new/results/" + self.args.dataset + "/perf/prediction_expID_" + \
