@@ -29,7 +29,7 @@ parser = argparse.ArgumentParser()
 # parser.add_argument('--alpha', type=float, default=.5, help='trade-off of p(t|x).')
 # parser.add_argument('--gamma', type=float, default=1., help='trade-off of p(z|x).')
 
-# parser.add_argument('--num_grid', type=int, default=20, help='Number of epochs to train.')  # 10000
+parser.add_argument('--num_grid', type=int, default=20, help='Number of epochs to train.')  # 10000
 # parser.add_argument('--epochs', type=int, default=160, help='Number of epochs to train.')  # 8000/(1step+2step)=160
 
 parser.add_argument('--beta', type=float, default=20, help='trade-off of targeted regur in TargetedModel')
