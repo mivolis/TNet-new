@@ -4,7 +4,7 @@ import pickle as pkl
 import torch.nn as nn
 import utils as utils
 import numpy as np
-from src/modules import GCN, NN, Predictor,Discriminator
+from modules import GCN, NN, Predictor,Discriminator
 
 class NetEsimator(nn.Module):
 
