@@ -32,7 +32,7 @@ parser = argparse.ArgumentParser()
 # parser.add_argument('--num_grid', type=int, default=20, help='Number of epochs to train.')  # 10000
 # parser.add_argument('--epochs', type=int, default=160, help='Number of epochs to train.')  # 8000/(1step+2step)=160
 
-# parser.add_argument('--beta', type=float, default=20, help='trade-off of targeted regur in TargetedModel')
+parser.add_argument('--beta', type=float, default=20, help='trade-off of targeted regur in TargetedModel')
 # parser.add_argument('--tr_knots', type=float, default=0.1, help='trade-off of targeted regur in TargetedModel')
 
 # parser.add_argument('--lr_1step', type=float, default=1e-4, help='Initial learning rate.')
